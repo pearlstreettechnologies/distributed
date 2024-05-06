@@ -2287,7 +2287,6 @@ class SchedulerState:
         runnable), it will be recommended to ``no-worker`` or ``queued``.
         """
         ts = self.tasks[key]
-        logger.info(f"Transitioning {key} from waiting to processing, {ts.priority} {ts}")
 
         if self.is_rootish(ts):
             # NOTE: having two root-ish methods is temporary. When the feature flag is
@@ -3373,7 +3372,6 @@ class SchedulerState:
         """Convert a single computational task to a message"""
         # FIXME: The duration attribute is not used on worker. We could save ourselves the
         #        time to compute and submit this
-        logger.info(f"Sending task compute message: {ts.key} {ts.priority}")
         if duration < 0:
             duration = self.get_task_duration(ts)
         ts.run_id = next(TaskState._run_id_iterator)
@@ -4550,8 +4548,6 @@ class Scheduler(SchedulerState, ServerNode):
                     logger.warning(f"Encountered erred dependency. target={ts} dep={dts} {dts.exception_text=} {dts.exception_blame=} {dts.traceback_text}")
                     break
 
-        logger.info(f"recommendations: {recommendations}")
-
         annotations_for_plugin: defaultdict[str, dict[str, Any]] = defaultdict(dict)
         for key in keys_with_annotations:
             ts = self.tasks[key]
@@ -4832,9 +4828,6 @@ class Scheduler(SchedulerState, ServerNode):
                     generation,
                     internal_priority[ts.key],
                 )
-                logger.info(f"priority_set {ts=}")
-            else:
-                logger.info(f"no_priority_set {ts=}")
 
             if self.validate and ts.run_spec:
                 assert isinstance(ts.priority, tuple) and all(

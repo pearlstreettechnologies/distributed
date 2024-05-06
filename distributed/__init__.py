@@ -182,5 +182,3 @@ __all__ = [
     "widgets",
     "worker_client",
 ]
-
-print("hello pearlstreet!")

@@ -3,9 +3,23 @@ Distributed
 
 [PEARLSTREET CUSTOM BUILD INSTRUCTIONS]
 
-First, follow instructions here: https://docs.dask.org/en/latest/develop.html#development-environment
+For first build, follow instructions here: https://docs.dask.org/en/latest/develop.html#development-environment
 
-Then run:
+
+Once you've done the setup, quicker route is:
+
+First, activate the base conda env:
+```
+eval "$(/home/lucasmg/anaconda3/bin/conda shell.bash hook)"
+```
+
+Then activate your conda environment for dask:
+```
+conda activate <env_name>
+```
+
+
+Once you've set up your build env, to build run:
 ```
 python -m build
 ```
