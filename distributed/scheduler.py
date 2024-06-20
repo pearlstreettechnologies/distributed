@@ -1907,7 +1907,7 @@ class SchedulerState:
             ts = self.tasks.get(key)
             if ts is None:
                 return {}, {}, {}
-            logger.info("Transition %r %s->%s", key, ts._state, finish)
+            # logger.info("Transition %r %s->%s", key, ts._state, finish)
             start = ts._state
             if start == finish:
                 return {}, {}, {}
